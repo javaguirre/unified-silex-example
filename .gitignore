@@ -1,5 +1,6 @@
 vendor/
 cache/
+web/upload/
 
 # Composer files
 composer.phar
