@@ -1,19 +1,30 @@
-# Install for the example (ubuntu)
+# Installing the Vagrant way
+
+    vagrant up
+    vagrant ssh
+    cd unified
+    php -S localhost:8000 -t web web/index.php
+
+You could see then the app in you host localhost:8000
+
+# Installing locally
+
+## Install for the example (ubuntu)
 
     curl -sS https://getcomposer.org/installer | php
     php composer.phar install
 
-## Install Silex
+### Install Silex
 
 http://silex.sensiolabs.org/doc/intro.html
 
-## Static files (needs node-npm)
+### Static files (needs node-npm)
 
     sudo apt-get install npm
     npm -g install bower
     bower install ; to get the static files
 
-# Execute the example
+## Execute the example
 
     php -S localhost:8000 -t web web/index.php
 
