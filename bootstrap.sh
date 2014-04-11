@@ -21,4 +21,4 @@ sudo apt-get -y install mp4split
 # Unified example
 git clone https://github.com/javaguirre/unified-silex-example.git unified
 cd unified
-php -S localhost:8000 -t web web/index.php
+nohup php -S localhost:8000 -t web web/index.php &

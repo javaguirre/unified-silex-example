@@ -1,11 +1,8 @@
 # Installing the Vagrant way
 
     vagrant up
-    vagrant ssh
-    cd unified
-    php -S localhost:8000 -t web web/index.php
 
-You could see then the app in you host localhost:8000
+You could see then the app in your host localhost:8000
 
 # Installing locally
 
