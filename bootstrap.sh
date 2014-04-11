@@ -1,4 +1,7 @@
 #!/bin/bash
+# TODO We could check if repositories already in apt
+# and if the unified repository is already there
+# but this is working for the demo
 
 # PHP5 and git
 sudo apt-get -y update
@@ -8,7 +11,7 @@ sudo apt-get -y update
 sudo apt-get -y install php5-cli
 
 # Install mp4split
-sudo add-apt-repository "deb http://repository.unified-streaming.com/ precise multiverse"
+sudo sh -c 'echo "deb http://repository.unified-streaming.com/ precise multiverse" >> /etc/apt/sources.list'
 wget http://repository.unified-streaming.com/unifiedstreaming.pub
 sudo apt-key add unifiedstreaming.pub
 sudo apt-get -y update
