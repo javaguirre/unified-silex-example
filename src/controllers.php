@@ -41,7 +41,7 @@ $app->post('/', function (Request $request) use ($app) {
             $error = 'Please upload a valid video file';
         } else {
             $files['FileUpload']->move($app['upload_dir'], $filename);
-            $zipFile = $app['unified']->getZipArchive($path);
+            $zipFile = $app['unified']->getZipArchive($app['upload_dir']);
 
             return new Response(file_get_contents($zipFile), 200, $headers);
         }

@@ -18,7 +18,7 @@ $app->register(new TwigServiceProvider(), array(
     'twig.options' => array('cache' => __DIR__.'/../cache/templates'),
 ));
 
-$app['upload_dir'] = $path = __DIR__.'/../web/upload/';
+$app['upload_dir'] = __DIR__ . '/../web/upload/';
 
 $app['unified'] = function () {
     return new UnifiedService();
