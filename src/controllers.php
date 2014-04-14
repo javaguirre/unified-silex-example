@@ -15,13 +15,15 @@ $app->get('/', function (Request $request) use ($app) {
 
     return $app['twig']->render('index.html.twig', array(
             'message' => 'Upload a file',
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'notification' => ''
         )
     );
 });
 
 $app->post('/', function (Request $request) use ($app) {
 
+    $error = '';
     $form = $app['form.factory']->createBuilder('form')
         ->add('FileUpload', 'file')
         ->getForm();
@@ -33,15 +35,24 @@ $app->post('/', function (Request $request) use ($app) {
         $files = $request->files->get($form->getName());
         $filename = $files['FileUpload']->getClientOriginalName();
 
-        $files['FileUpload']->move($app['upload_dir'], $filename);
+        //TODO We will add this check in validator yml in the future
+        // http://symfony.com/doc/current/book/validation.html
+        if(!$app['unified']->checkMimetypes($files['FileUpload']->getClientMimeType())) {
+            $error = 'Please upload a valid video file';
+        } else {
+            $files['FileUpload']->move($app['upload_dir'], $filename);
+            $zipFile = $app['unified']->getZipArchive($path);
 
-        $zipFile = $app['unified']->getZipArchive($path);
-
-        return new Response(file_get_contents($zipFile), 200, $headers);
+            return new Response(file_get_contents($zipFile), 200, $headers);
+        }
     }
 
-    //TODO
-    return new Response();
+    return $app['twig']->render('index.html.twig', array(
+            'message' => 'Upload a file',
+            'form' => $form->createView(),
+            'notification' => $error
+        )
+    );
 });
 
 $app->error(function (\Exception $e, $code) use ($app) {

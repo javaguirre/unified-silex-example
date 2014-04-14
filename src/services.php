@@ -8,6 +8,10 @@ class UnifiedService
     //TODO this will be in a separate file
     const LICENSE = "license_key";
 
+    public static $mimetypes = array(
+        'video/mp4'
+    );
+
     public function executeProcess($command) {
         //This will be a background process in the future
         //with a redis queue
@@ -55,5 +59,10 @@ class UnifiedService
         $zip->close();
 
         return $zip;
+    }
+
+    public function checkMimetypes($mimetype)
+    {
+        return in_array($mimetype, self::$mimetypes);
     }
 }
