@@ -23,16 +23,16 @@ sudo apt-get -y install libexpat1 libpcrecpp0 uuid libsqlite3-0 libcurl3
 sudo apt-get -y install mp4split
 
 # Unified example
-git clone https://github.com/javaguirre/unified-silex-example.git unified
+su - vagrant -c "git clone https://github.com/javaguirre/unified-silex-example.git unified"
 cd unified
 
 # Bower
 sudo npm -g install bower
-bower install
+su - vagrant -c "cd /home/vagrant/unified && bower install"
 
 # Silex
-curl -sS https://getcomposer.org/installer | php
-php composer.phar install
+su - vagrant -c "curl -sS https://getcomposer.org/installer | php"
+su - vagrant -c "cd /home/vagrant/unified && php ../composer.phar install"
 
 # Run the app
 nohup php -S localhost:8000 -t web web/index.php &
